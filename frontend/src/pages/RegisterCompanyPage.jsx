@@ -25,6 +25,7 @@ export default function RegisterCompanyPage() {
   const [step, setStep] = useState(0)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const [errors, setErrors] = useState({});
 
   const [form, setForm] = useState({
     company_name: '',
@@ -48,24 +49,59 @@ export default function RegisterCompanyPage() {
 
   const update = (field, value) => setForm((f) => ({ ...f, [field]: value }))
 
-  const next = () => setStep((s) => Math.min(s + 1, STEPS.length - 1))
-  const back = () => setStep((s) => Math.max(s - 1, 0))
+const next = () => {
+  let newErrors = {};
 
-  const handleSubmit = async () => {
-    setError('')
-    setLoading(true)
-    try {
-      const res = await authApi.registerCompany(form)
-      login(res.data.access_token, res.data.user)
-      navigate('/dashboard')
-    } catch (err) {
-      setError(err.response?.data?.detail || 'Could not register company')
-    } finally {
-      setLoading(false)
-    }
+  if (step === 0) {
+    if (!form.company_name.trim()) newErrors.company_name = "Company Name is required";
+    if (!form.contact_number.trim()) newErrors.contact_number = "Contact Number is required";
+    if (!form.business_email.trim()) newErrors.business_email = "Business Email is required";
+    if (!form.owner_full_name.trim()) newErrors.owner_full_name = "Owner Name is required";
+    if (!form.owner_password.trim()) newErrors.owner_password = "Password is required";
   }
 
-  return (
+  if (step === 1) {
+    if (!form.address_line.trim()) newErrors.address_line = "Address is required";
+    if (!form.city.trim()) newErrors.city = "City is required";
+    if (!form.state.trim()) newErrors.state = "State is required";
+    if (!form.pin_code.trim()) newErrors.pin_code = "PIN Code is required";
+    if (!form.country.trim()) newErrors.country = "Country is required";
+    if (!form.gstin.trim()) newErrors.gstin = "GSTIN is required";
+    if (!form.pan.trim()) newErrors.pan = "PAN is required";
+  }
+
+  setErrors(newErrors);
+
+  if (Object.keys(newErrors).length > 0) return;
+
+  setStep((s) => Math.min(s + 1, STEPS.length - 1));
+};
+
+const back = () => {
+  setErrors({});
+  setStep((s) => Math.max(s - 1, 0));
+};
+
+const handleSubmit = async () => {
+  try {
+    setLoading(true);
+    setError("");
+
+    const response = await authApi.registerCompany(form);
+
+    login(response);
+
+    navigate("/dashboard");
+  } catch (err) {
+    setError(
+      err?.response?.data?.detail ||
+      "Unable to register company."
+    );
+  } finally {
+    setLoading(false);
+  }
+};
+return (
     <div className="min-h-screen bg-slate-50">
       <header className="h-14 border-b border-slate-200 bg-white flex items-center px-6 gap-2">
         <div className="h-7 w-7 rounded bg-navy-700 text-white flex items-center justify-center font-bold text-xs">N</div>
@@ -148,10 +184,21 @@ export default function RegisterCompanyPage() {
               <Field label="Address line" required>
                 <input className="input" value={form.address_line} onChange={(e) => update('address_line', e.target.value)} placeholder="Plot 14, SIDCO Industrial Estate, Ambattur" />
               </Field>
+              {errors.address_line && (
+  <p className="text-red-600 text-sm mt-1">
+    {errors.address_line}
+  </p>
+)}
               <div className="grid grid-cols-2 gap-4">
                 <Field label="City" required>
                   <input className="input" value={form.city} onChange={(e) => update('city', e.target.value)} placeholder="Chennai" />
                 </Field>
+                {errors.city && (
+<p className="text-red-600 text-sm mt-1">
+{errors.city}
+</p>
+)}
+                
                <Field label="State" required>
   <select
     className="input"
@@ -173,6 +220,11 @@ export default function RegisterCompanyPage() {
                 <Field label="PIN code" required>
                   <input className="input" value={form.pin_code} onChange={(e) => update('pin_code', e.target.value)} placeholder="600058" />
                 </Field>
+                {errors.pin_code && (
+<p className="text-red-600 text-sm mt-1">
+{errors.pin_code}
+</p>
+)}
                 <Field label="Country">
   <select
     className="input"
@@ -198,9 +250,19 @@ export default function RegisterCompanyPage() {
                 <Field label="GSTIN" required>
                   <input className="input" value={form.gstin} onChange={(e) => update('gstin', e.target.value.toUpperCase())} placeholder="33AAECS1234F1Z5" />
                 </Field>
+                {errors.gstin && (
+<p className="text-red-600 text-sm mt-1">
+{errors.gstin}
+</p>
+)}
                 <Field label="PAN" required>
                   <input className="input" value={form.pan} onChange={(e) => update('pan', e.target.value.toUpperCase())} placeholder="AAECS1234F" />
                 </Field>
+                {errors.pan && (
+<p className="text-red-600 text-sm mt-1">
+{errors.pan}
+</p>
+)}
                 <Field label="Default GST rate">
                   <select className="input" value={form.default_gst_rate} onChange={(e) => update('default_gst_rate', e.target.value)}>
                     {[0, 5, 12, 18, 28].map((r) => <option key={r} value={r}>{r}%</option>)}
