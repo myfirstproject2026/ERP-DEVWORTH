@@ -234,12 +234,12 @@ export default function LoginPage() {
             </div>
           )}
 
-          <p className="text-center text-sm text-slate-500 mt-6">
+          {/* <p className="text-center text-sm text-slate-500 mt-6">
             New company?{' '}
             <Link to="/register" className="text-brand-600 font-medium hover:underline">
               Register your business →
             </Link>
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

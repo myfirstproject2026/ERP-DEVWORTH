@@ -120,7 +120,7 @@ export default function DashboardPage() {
       {/* P&L CHART */}
       <div className="bg-white border border-slate-200 rounded-xl p-5 mb-5">
         <div className="flex items-center justify-between mb-4">
-          <h3 className="font-semibold text-slate-900 text-sm">Profit &amp; loss — last 6 months</h3>
+          <h3 className="font-semibold text-slate-900 text-sm">Profit & amp; loss — last 6 months</h3>
           <span className="text-xs text-slate-400">₹ in lakhs</span>
         </div>
         <ResponsiveContainer width="100%" height={220}>

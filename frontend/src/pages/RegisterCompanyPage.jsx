@@ -104,8 +104,8 @@ const handleSubmit = async () => {
 return (
     <div className="min-h-screen bg-slate-50">
       <header className="h-14 border-b border-slate-200 bg-white flex items-center px-6 gap-2">
-        <div className="h-7 w-7 rounded bg-navy-700 text-white flex items-center justify-center font-bold text-xs">N</div>
-        <span className="font-semibold text-sm text-slate-900">Nexus ERP</span>
+        <div className="h-7 w-7 rounded bg-navy-700 text-white flex items-center justify-center font-bold text-xs">DW</div>
+        <span className="font-semibold text-sm text-slate-900"> Devworth ERP</span>
         <span className="text-slate-300">—</span>
         <span className="text-sm text-slate-500">Company Registration</span>
       </header>

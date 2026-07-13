@@ -10,10 +10,35 @@ import { useAuth } from '../context/AuthContext'
 const mainNav = [{ to: '/dashboard', label: 'Dashboard', icon: LayoutGrid }]
 
 const loginSetupNav = [
-  { to: '/company-profile', label: 'Company Profile', icon: Building2 },
-  { to: '/branches', label: 'Branches', icon: GitBranch },
-  { to: '/users', label: 'Users', icon: Users },
-  { to: '/roles', label: 'Roles & Permissions', icon: ShieldCheck },
+  {
+    to: '/company-profile',
+    label: 'Company Profile',
+    icon: Building2,
+  },
+
+  {
+    to: '/register',
+    label: 'Registration',
+    icon: Building2,
+  },
+
+  {
+    to: '/branches',
+    label: 'Branches',
+    icon: GitBranch,
+  },
+
+  {
+    to: '/users',
+    label: 'Users',
+    icon: Users,
+  },
+
+  {
+    to: '/roles',
+    label: 'Roles & Permissions',
+    icon: ShieldCheck,
+  },
 ]
 
 const workspaceNav = [
@@ -73,10 +98,10 @@ export default function AppLayout() {
       <aside className="w-60 shrink-0 border-r border-slate-200 bg-white flex flex-col">
         <div className="h-16 flex items-center gap-2 px-5 border-b border-slate-100">
           <div className="h-8 w-8 rounded-lg bg-navy-700 text-white flex items-center justify-center font-bold text-sm">
-            N
+            DW
           </div>
           <div className="leading-tight">
-            <p className="font-semibold text-sm text-slate-900">Nexus ERP</p>
+            <p className="font-semibold text-sm text-slate-900">Devworth ERP</p>
             <p className="text-[10px] tracking-wide text-slate-400 font-medium">MULTI-COMPANY SUITE</p>
           </div>
         </div>

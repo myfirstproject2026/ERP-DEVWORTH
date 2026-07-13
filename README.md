@@ -122,7 +122,7 @@ npm run dev
 ## 6. Testing the app
 
 1. Open http://localhost:5173 — you'll land on the Login page.
-2. Sign in with `ravi@sundarprecision.com` / `Password@123`.
+2. Sign in with `prasannaranganthan.2001@gmail.com` / `Welcome@2026`.
 3. You'll see the Dashboard with live data pulled from MySQL.
 4. Try the sidebar: Company Profile, Branches, Users, Roles & Permissions.
 5. Click the floating AI Assistant button (bottom-right) or the sidebar shortcut,
@@ -187,6 +187,7 @@ nexus-erp/
             ├── RolesPage.jsx
             ├── RoleEditPage.jsx
             └── AiAssistantPage.jsx
+            
 ```
 
 ---
